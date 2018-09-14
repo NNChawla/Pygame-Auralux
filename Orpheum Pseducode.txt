@@ -1,0 +1,99 @@
+Set number of planets
+-randomly generate at least 9 planet sprites at random locations
+-random ring count
+
+Users set at 3 different planets
+-Planet sprite has base state Active or Inactive
+-Spawn in 3 of the random planets with parameter 'Active'
+-Set planetiD equal to one of the player iDs
+
+User controlled planets produce set number of units per second
+-Active planet instantiates set number of units every one second (pygame.time.get_ticks - SECOND)
+
+units displayed in ring around planet location
+-Detect for collision between unit sprites and planet sprites
+-If planet and unit sprites have same ID then unit sprites move in circular pattern around planet
+
+number of rings dictates how many times planet can be upgraded
+-takes 100 units to upgrade any given ring level
+
+drag to select units or tap planets to select its orbiting units
+-clicking on planet selects all units orbiting it
+-drag and select function allows rect selection of units
+
+planet upgrades if there are enough units (100)
+-Upgrade planet by clicking on it and pressing 'U'
+-Planet absorbs up to 100 orbiting units
+
+Upgraded planet produces twice as many units
+-Ring number * modifier is how many units it outputs per second
+-modifier is initally 1
+
+Select units and send them to an unclaimed planet, if there are enough it will be claimed (100)
+-if planet inactive, takes 100 units of same ID to claim it
+-once planet active, claim status stays 100 unless decreased
+
+Units travel slowly from planet to another
+-selected units x and y move speeds updated so they travel linearly to selected coordinates
+
+If units collide with enemy units they die
+-If collision between two units and they are different iD, they both die
+
+When units collide with claimed planet they join its orbit
+-if units of same iD as planet collide with planet, sprites are placed in orbit
+
+If there are enough units to upgrade planet and you choose to, the amount of units needed are removed from the planet's orbit
+-Subtracts units from unitsInOrbit and adds them to upgradeStatus until 100
+
+If player units attack another player's claimed planet, the units will kill each other and when planet has no protecting units it's claim percentage decreases
+-If collision between units and planet with differing id's, each unit dies and the planet's claim percentage is decreased till 0
+-If collision between units and planet with no iD, claim status increased and planet iD matches unit iD
+
+Too many units on screen
+-If collision between units with same iD, reset one unit to be 2 pixels away from the other one's left side
+
+TBA:
+Meteor Hopping Transport
+Warp Factor Transport
+Obstacles and Hindrances (space debris, black hole, 
+Tally Death Count and Set Par for Stage
+Anomaly planets that require extra to claim
+Upgradeable Units
+Some units buff other units around them (commander units)
+lavin ::
+Phantom Platoon (Phases through other units, only damages planets)
+clicking on planet tells number of units, upgrade status, production rate, etc.
+ORPHEUM: "All the world's a stage, and all the men and women merely players..." - William Shakespeare
+
+Planet Sprites
+-update ()
+	-drawRings (ringNumber, upgradeStatus)
+	-upgrade (unitsInOrbit, upgradeStatus)
+	-unitProduction (ringNumber, modifier)
++int state (init = 0)
++int planetiD (init = 0) //when claim status incremented from 0 to 1, planetiD set equal to unit.iD collision
++int modifier (init = 1) // can go to 0 for future reference
++int unitsInOrbit (init = 0)
++int upgradeStatus (init = 0)
++int ringNumber (init = 1)
++int claimStatus (init = 0) //acts as health once planet is active //when 0, planetiD = 0
++int radius (init = image radius)
+*Circular Collisions
+*Coordinates //when randomly setting, take into account screen height&width
+
+Unit Sprites
+-update ()
+	-travel (x, y)
+	-enterOrbit (planet.radius, planet.x, planet.y) //keep certain number of pixels away from planet edge
+	//increments unitsInOrbit
++iD (1, 2, 3, etc.)
++state (init = 0) //1 for selected
+*Circular Collisions
+
+-draw_text (surface, text, size, x, y)
+-newUnit () ***
+-loadImage (directory, img_name)
+-unitSelect () //Ctrl+Left_Down_Click to Ctrl+Left_Up_Click
++int final SECOND (init = 1000)
++int x (init = x_coordinate_of_mouse_click)
++int y (init = y_coordinate_of_mouse_click)
