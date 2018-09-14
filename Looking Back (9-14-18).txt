@@ -1,0 +1,13 @@
+Orbit Exit Collisions:
+-When units were exiting orbit they'd collide with backside of planet and be reset; They should've avoided it or
+been relocated to the other side.
+
+Movement:
+-Units should have moved in a cloud rather than one pixel
+
+Level Design:
+-Should have been designed levels and procedurally generated level options
+
+Planet Placement:
+-Planets should have been able to be placed within confines of screen without hitting each other
+
