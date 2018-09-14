@@ -1,11 +1,7 @@
-#Pygame Template for new Pygame Project
 import pygame
 import random
 from os import path
 from math import pi
-import cProfile, pstats, StringIO
-pr = cProfile.Profile()
-pr.enable()
 
 img_dir = path.join(path.dirname(__file__), 'img')
 
@@ -88,7 +84,6 @@ def unitSelect(): #needs collision check with units
 	
 	if keystate[pygame.K_s] and mousestate[0]:
 			coords.append(pygame.mouse.get_pos())
-			#print coords
 			tempRect = pygame.Rect(0, 0, 0, 0)
 			if coords[len(coords)-1][1] > coords[0][1] and coords[len(coords)-1][0] > coords[0][0]:	
 				tempRect.width = coords[len(coords)-1][0] - coords[0][0]
@@ -314,7 +309,6 @@ class Unit(pygame.sprite.Sprite):
 			keystate = pygame.key.get_pressed()
 			if mousestate[0] and selectRect == (0,0,0,0): #click where you want units to go
 				self.coords = pygame.mouse.get_pos()
-				#ssprint self.coords
 				self.travel(self.coords[0], self.coords[1])
 				self.traveling = True
 				self.selected = False
@@ -368,7 +362,6 @@ class Unit(pygame.sprite.Sprite):
 		radius = source.radius+14
 		
 		self.orbitDelay = pygame.time.get_ticks()
-		#print self.count
 		if self.count < radius:
 			self.rect.move_ip(1,0)
 			quadrant = 0
@@ -511,11 +504,5 @@ while running:
 	pygame.display.flip()
 	if clock.get_fps() < 21.0 and clock.get_fps() > 20.0:
 		break
-pr.disable()
-s = StringIO.StringIO()
-sortby = 'tottime'
-ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-ps.print_stats()
-print s.getvalue()
-raw_input()
+
 pygame.quit()
