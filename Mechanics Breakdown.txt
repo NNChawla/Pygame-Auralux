@@ -63,7 +63,6 @@ Some units buff other units around them (commander units)
 lavin ::
 Phantom Platoon (Phases through other units, only damages planets)
 clicking on planet tells number of units, upgrade status, production rate, etc.
-ORPHEUM: "All the world's a stage, and all the men and women merely players..." - William Shakespeare
 
 Planet Sprites
 -update ()
