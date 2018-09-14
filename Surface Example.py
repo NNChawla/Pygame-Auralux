@@ -1,4 +1,3 @@
-#Pygame Template for new Pygame Project
 import pygame
 import random
 from math import pi
