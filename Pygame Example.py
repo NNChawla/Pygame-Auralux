@@ -1,5 +1,3 @@
-#Pygame Template for new Pygame Project
-
 import pygame
 import random
 from os import path
