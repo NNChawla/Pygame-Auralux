@@ -1,3 +1,9 @@
+Refactoring:
+-code was written rushed and messily; refactor so that it looks better/is more efficient
+
+Sprites:
+-add legitimate graphics for planets, units don't matter but performance wise it would be interesting
+
 Orbit Exit Collisions:
 -When units were exiting orbit they'd collide with backside of planet and be reset; They should've avoided it or
 been relocated to the other side.
@@ -17,8 +23,8 @@ Networking:
 Player Specific Control:
 -Player should only be able to move their units
 
-AI
+AI:
 -Computer controlled enemy should exist; Dartmouth paper on auralux AI is useful in this case
 
-Upgrades
+Upgrades:
 -multiple upgrades listed in mechanics breakdown; their implementations would be interesting
