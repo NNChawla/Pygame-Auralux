@@ -11,3 +11,14 @@ Level Design:
 Planet Placement:
 -Planets should have been able to be placed within confines of screen without hitting each other
 
+Networking:
+-Local/Online Multiplayer should have been developed
+
+Player Specific Control:
+-Player should only be able to move their units
+
+AI
+-Computer controlled enemy should exist; Dartmouth paper on auralux AI is useful in this case
+
+Upgrades
+-multiple upgrades listed in mechanics breakdown; their implementations would be interesting
