@@ -31,3 +31,7 @@ AI:
 
 Upgrades:
 -multiple upgrades listed in mechanics breakdown; their implementations would be interesting
+
+Specifics:
+-unitKill: should it reinstantiate units instead of completely deleting them and generating new ones?
+-unitSelect: it should have a parameter for player id and filter selected units based on that id
