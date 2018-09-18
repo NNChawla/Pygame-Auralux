@@ -35,3 +35,5 @@ Upgrades:
 Specifics:
 -unitKill: should it reinstantiate units instead of completely deleting them and generating new ones?
 -unitSelect: it should have a parameter for player id and filter selected units based on that id
+-largest increase in efficiency is going to be in class specific methods
+-reimagining the units not as objects may have an affect
