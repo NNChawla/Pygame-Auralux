@@ -1,8 +1,11 @@
 Refactoring:
--code was written rushed and messily; refactor so that it looks better/is more efficient
+-code was written rushed and messily; refactor and make it more structured
 
-Sprites:
--add legitimate graphics for planets, units don't matter but performance wise it would be interesting
+Performance:
+-Should have been able to handle tens of thousands of units and run around 30 fps, at max probably handled 7-10k
+
+Graaphics:
+-add sprites planets, units don't matter but performance wise it would be interesting
 
 Orbit Exit Collisions:
 -When units were exiting orbit they'd collide with backside of planet and be reset; They should've avoided it or
@@ -12,7 +15,7 @@ Movement:
 -Units should have moved in a cloud rather than one pixel
 
 Level Design:
--Should have been designed levels and procedurally generated level options
+-Should have included designed levels and option for procedurally generated levels
 
 Planet Placement:
 -Planets should have been able to be placed within confines of screen without hitting each other
