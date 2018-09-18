@@ -3,6 +3,7 @@ import random
 from os import path
 from math import pi
 
+#setting path to image directory
 img_dir = path.join(path.dirname(__file__), 'img')
 
 #Screen Constants
@@ -117,6 +118,11 @@ def unitSelect(): #needs collision check with units
 
 #Classes
 class Planet(pygame.sprite.Sprite):
+	"""
+	
+	This class generates a planet object with methods to upgrade itself and generate units
+	
+	"""
 	def __init__(self, spawnX, spawnY, piD = 0, rings = 0):
 		pygame.sprite.Sprite.__init__(self)
 
@@ -158,6 +164,8 @@ class Planet(pygame.sprite.Sprite):
 				self.claimStatus = 100
 
 	def update(self):
+		"""Every cycle of the game loop, executes these commands"""
+		
 		#planet claimStatus depleted, planetiD becomes 0
 		if self.claimStatus == 0:
 			self.planetiD = 0
@@ -190,6 +198,7 @@ class Planet(pygame.sprite.Sprite):
 				self.image.fill(self.color)
 
 	def unitProduction(self, rings, modifier):
+		"""Based on the rings of a planet, produces a set number of units"""
 		self.unitProdDelay = pygame.time.get_ticks()
 		unitRate = rings+1 * 2 + modifier
 		count = 1
@@ -205,6 +214,7 @@ class Planet(pygame.sprite.Sprite):
 			count += 1
 
 	def upgrade(self): #needs to fix claim status first
+		"""removes units from orbit of planet and upgrades rings based on amount of units stored"""
 		tbkill = self.unitsInOrbit
 
 		if self.claimStatus < 100:
@@ -261,8 +271,8 @@ class Planet(pygame.sprite.Sprite):
 			unwanted.add(self.orbitList[i])
 		self.orbitList = [i for i in self.orbitList if i not in unwanted]
 
-
 	def drawRings(self, rings, status):
+		"""Displays rings around planet"""
 		for i in range(self.ringNumber):
 			self.rings.append(self.rect.inflate(self.radius*2+i*10, self.radius*2+i*10))
 		for i in range(rings):
@@ -277,11 +287,19 @@ class Planet(pygame.sprite.Sprite):
 				break""" #TBA for hidden rings
 
 	def drawClaimStatus(self, status):
+		"""Draws fill percentage of rings around planet"""
 		rect = self.rect.inflate(self.radius, self.radius)
 		pygame.draw.ellipse(screen, GREY, rect, 2)
 		pygame.draw.arc(screen, self.color, rect, pi/2.0, (status/100.0)*2*pi + pi/2.0, 2)
 
 class Unit(pygame.sprite.Sprite):
+	
+	"""
+	
+	This class generates a single unit bound to a specific player with methods to travel and enter orbit
+	
+	"""
+	
 	def __init__(self, spawnX, spawnY, source, uiD = 0, count = 0):
 		pygame.sprite.Sprite.__init__(self)
 		self.image = pygame.Surface((2,2)).convert()
@@ -306,6 +324,7 @@ class Unit(pygame.sprite.Sprite):
 		self.source.orbitList.append(self)
 	
 	def update(self):
+		"""Every cycle of the game loop, executes these commands"""
 		global unitTravel
 		if self.selected:			
 			self.image.fill(YELLOW)
@@ -334,6 +353,7 @@ class Unit(pygame.sprite.Sprite):
 		
 	#called when selected and moved
 	def travel(self, x, y):
+		"""Moves the unit towards the point specified by the player when the unit is selected"""
 		global unitTravel
 		if self.rect.centerx < x:
 			if x - self.rect.centerx > 10:
@@ -363,6 +383,7 @@ class Unit(pygame.sprite.Sprite):
 		
 	#NEEDS to have function for when collides with claimed planet
 	def enterOrbit(self, source):
+		"""In place of an animation, moves unit around the planet in an apparent orbit"""
 		radius = source.radius+14
 		
 		self.orbitDelay = pygame.time.get_ticks()
