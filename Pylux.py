@@ -38,8 +38,6 @@ background = background.convert()
 background.fill(BLACK)
 
 #Global Variables
-#coordX = X_coordinate_of_mouse_click
-#coordY = Y_coordinate_of_mouse_click
 unitRects = {} #for collision checks of units
 unitTravel = {}
 coords = []
@@ -48,11 +46,13 @@ selectRect = pygame.Rect(0,0,0,0)
 
 #Functions
 def newUnit(x, y, source, iD, unitCount = 0):
+	"""Generates a new unit for specified source"""
 	unit = Unit(x, y, source, iD, unitCount)
 	all_sprites.add(unit)
 	unitRects[unit] = tuple(unit.rect)
 	
 def newPlanet(x, y, id, rings):
+	"""Generates a planet either bound to a player or neutral"""
 	planet = Planet(x, y, id, rings)
 	all_sprites.add(planet)
 	planets.add(planet)
@@ -60,12 +60,14 @@ def newPlanet(x, y, id, rings):
 	
 font_name = pygame.font.match_font('arial')
 def draw_text(surface, text, size, x, y):
+	"""displays text to the screen"""
 	font = pygame.font.Font(font_name, size)
 	text_surface = font.render(text, True, WHITE)
 	text_rect = text_surface.get_rect(centerx = surface.get_width()/2)
 	surface.blit(text_surface, text_rect)
 
 def unitKill(unit):
+	"""completely removes unit from lists"""
 	unit.kill()
 	unit.remove(all_sprites)
 	if unit in unitRects:
@@ -74,9 +76,11 @@ def unitKill(unit):
 		del unitTravel[unit]
 
 def loadImage(directory, img_name):
+	"""loads immage image from current directory"""
 	return pygame.image.load(path.join(directory, img_name)).convert()
 
 def unitSelect(): #needs collision check with units
+	"""Draws selection rectangle that selects and highlights any units it collides with"""
 	global coords, selectRect
 
 	keystate = pygame.key.get_pressed()
