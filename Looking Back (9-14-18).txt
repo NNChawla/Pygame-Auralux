@@ -4,7 +4,7 @@ Refactoring:
 Performance:
 -Should have been able to handle tens of thousands of units and run around 30 fps, at max probably handled 7-10k
 
-Graaphics:
+Graphics:
 -add sprites planets, units don't matter but performance wise it would be interesting
 
 Orbit Exit Collisions:
@@ -13,6 +13,7 @@ been relocated to the other side.
 
 Movement:
 -Units should have moved in a cloud rather than one pixel
+(Add 3rd class: unit cloud. Unit cloud size determined by number of units it holds, makes it so that youre moving one object instead of hundreds and only checking for collisions with one object. Size is dynamic, increases and decreases based on units joining and dying. Percent overlap between enemy units and cloud gives percent decrease in size. Percent selected by selection rectangle gives size of mini cloud that breaks off and is selected.)
 
 Level Design:
 -Should have included designed levels and option for procedurally generated levels
