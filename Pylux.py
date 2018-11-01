@@ -43,6 +43,8 @@ unitRects = {} #for collision checks of units
 unitTravel = {}
 coords = []
 planetList = []
+pXCoords = [0]
+pYCoords = [0]
 selectRect = pygame.Rect(0,0,0,0)
 
 #Functions
@@ -58,6 +60,8 @@ def newPlanet(x, y, id, rings):
 	all_sprites.add(planet)
 	planets.add(planet)
 	planetList.append(planet)
+	pXCoords.append(x)
+	pYCoords.append(y)
 	
 font_name = pygame.font.match_font('arial')
 def draw_text(surface, text, size, x, y):
@@ -414,11 +418,31 @@ class Unit(pygame.sprite.Sprite):
 all_sprites = pygame.sprite.Group()
 planets = pygame.sprite.Group()
 
-for i in range(6):
-	newPlanet(i*100+150, i*100+150, 0, random.randrange(0, 3))
-for i in range(3):
-	newPlanet(i*200+250, i*200+150, i+1, random.randrange(0,2))
-
+neutrals = 6
+presets = 3
+for i in range(neutrals):
+	while(True):
+		tempXCoord = random.randint(100, WIDTH-100)
+		tempYCoord = random.randint(100, HEIGHT-100)
+		if len([x for x in pXCoords if tempXCoord < x+50 and tempXCoord > x-50]) > 0:
+			continue
+		elif len([y for y in pYCoords if tempYCoord < y+50 and tempYCoord > y-50]) > 0:
+			continue
+		else:
+			break
+	newPlanet(tempXCoord, tempYCoord, 0, random.randrange(0, 3))
+for i in range(presets):
+	while(True):
+		tempXCoord = random.randint(50, WIDTH-50)
+		tempYCoord = random.randint(50, HEIGHT-50)
+		if len([x for x in pXCoords if tempXCoord < x+50 and tempXCoord > x-50]) > 0:
+			continue
+		elif len([y for y in pYCoords if tempYCoord < y+50 and tempYCoord > y-50]) > 0:
+			continue
+		else:
+			break
+	newPlanet(tempXCoord, tempYCoord, i+1, random.randrange(0,2))
+	
 planetCoords = []
 for p in planetList:
 	coor = []
@@ -426,19 +450,6 @@ for p in planetList:
 		for j in range(p.rect.bottomright[1]-p.rect.height, p.rect.bottomright[1]):
 			coor.append((i,j))
 	planetCoords.append(coor)
-"""
-correction = []
-for planet in planets:
-	for i in correction:
-		distance = (((planet.rect.centerx-i[0])**2)+((planet.rect.centery-i[1])**2)**0.5)
-		if distance < planet.radius*2:
-			planet.rect.centerx = ((((planet.radius*3)**2) - ((planet.rect.centery - i[1])**2))**0.5)+i[0]
-			planet.rect.centery = ((((planet.radius*3)**2) - ((planet.rect.centerx - i[0])**2))**0.5)+i[1]
-			
-	correction.append((planet.rect.centerx, planet.rect.centery))
-	if HEIGHT-planet.rect.centerx < planet.radius:
-		planet.rect.centerx -= planet.radius
-"""
 
 all_sprites.clear(screen, background)
 
