@@ -63,6 +63,7 @@ Some units buff other units around them (commander units)
 lavin ::
 Phantom Platoon (Phases through other units, only damages planets)
 clicking on planet tells number of units, upgrade status, production rate, etc.
+Player ability to generate obstacles
 
 Planet Sprites
 -update ()
